@@ -1,0 +1,5 @@
+roles:
+  - name: configure_sudo_nopasswd
+    src: wolfsea89.rnp_tools_ansibleroles_configuresudo
+  - name: authorized_keys
+    src: myrostadler.add_authorized_keys

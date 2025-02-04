@@ -1,0 +1,17 @@
+- name: Configure homelab servers
+  hosts: homelab
+  become: yes
+  roles:
+    - role: authorized_keys
+      vars:
+        add_authorized_keys:
+          - "{{ lookup('file', '~/.ssh/id_ed25519.pub') }}"
+    - role: configure_sudo_nopasswd
+      register: input_role_os_distribution
+    - role: common
+  tasks: 
+    - name: Capture OS distribution from configuresudo role
+      ansible.builtin.include_role:
+        name: configure_sudo_nopasswd
+      register: input_role_os_distribution
+  

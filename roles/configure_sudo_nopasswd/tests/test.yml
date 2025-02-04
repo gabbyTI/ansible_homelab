@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: yes
+  remote_user: vagrant
+  
+  tasks:
+    - include_role:
+        name: ../../
+      vars:
+        input_role_os_distribution: "{{ ansible_distribution }}"
+
+    - name: Test edit sudoers file
+      shell: cat /etc/sudoers |grep -E "^(%sudo.ALL=\(ALL:ALL\).NOPASSWD:ALL)|(%wheel.ALL=\(ALL:ALL\).NOPASSWD:ALL)"
+      register: suoders_file
+      changed_when: false
+      failed_when: suoders_file.stdout == ""

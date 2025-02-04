@@ -1,0 +1,47 @@
+- name: "[Ubuntu] Set NOPASSWD in sudo group"
+  lineinfile:
+    dest: "{{ vars_role_sudo_config_path }}" 
+    regexp: '^#?%sudo'
+    line: "%sudo	ALL=(ALL:ALL) NOPASSWD:ALL"
+    state: present
+  when:
+    - input_role_os_distribution == "Ubuntu"
+
+- name: "[Debain] Set NOPASSWD in sudo group"
+  lineinfile:
+    dest: "{{ vars_role_sudo_config_path }}" 
+    regexp: '^#?%sudo'
+    line: "%sudo	ALL=(ALL:ALL) NOPASSWD:ALL"
+    state: present
+  when:
+    - input_role_os_distribution == "Debain"
+
+- name: "[CentOS] Set NOPASSWD in wheel group"
+  lineinfile:
+    dest: "{{ vars_role_sudo_config_path }}" 
+    regexp: '^#?%wheel'
+    line: "%wheel	ALL=(ALL:ALL) NOPASSWD:ALL"
+    state: present
+  when:
+    - input_role_os_distribution == "CentOS"
+
+- name: "[CentOS] Set NOPASSWD in wheel group"
+  lineinfile:
+    dest: "{{ vars_role_sudo_config_path }}" 
+    regexp: '^#?%wheel'
+    line: "%wheel	ALL=(ALL:ALL) NOPASSWD:ALL"
+    state: present
+  when:
+    - input_role_os_distribution == "RedHat"
+
+- name: "[Ubuntu] Set NOPASSWD in custom groups"
+  lineinfile:
+    dest: "{{ vars_role_sudo_config_path }}" 
+    regexp: '^#?%{{ item }}'
+    line: "%{{ item }}	ALL=(ALL:ALL) NOPASSWD:ALL"
+    state: present
+  loop: "{{ input_role_custom_groups_to_sudo }}"
+  loop_control:
+    loop_var: item
+  when:
+    - input_role_custom_groups_to_sudo is defined and input_role_custom_groups_to_sudo != []
