@@ -1,0 +1,52 @@
+# Ignore SSH private keys
+*.pem
+*.key
+*.crt
+*.pub
+
+# Ignore inventory files with secrets
+inventory
+inventory.yml
+hosts
+host_vars/*_vault.yml
+group_vars/*_vault.yml
+
+# Ignore Ansible secrets and vault files
+*.vault.yml
+*.vault
+*.secrets
+vault_pass.txt
+
+# Ignore temporary Ansible files
+*.retry
+*.log
+*.cache
+*.swp
+*.bak
+*.tmp
+
+# Ignore Python environment files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+.env/
+
+# Ignore IDE and editor files
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Ignore Ansible collections and roles downloaded via Galaxy
+collections/
+roles/*/molecule/
+roles/*/tests/
+roles/*/.cache/
+roles/*/.git/
+roles/*/.tox/
+
+# Ignore Terraform and cloud-related files (if applicable)
+*.tfstate
+*.tfstate.backup
+.terraform/
