@@ -2,7 +2,6 @@
 *.pem
 *.key
 *.crt
-*.pub
 
 # Ignore inventory files with secrets
 inventory

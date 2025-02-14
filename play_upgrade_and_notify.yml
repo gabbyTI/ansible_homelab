@@ -1,0 +1,33 @@
+- name: Upgrade installed services and notify if reboot is needed
+  hosts: homelab
+  become: true
+  gather_facts: false
+  tasks:
+
+    - name: Upgrade all installed packages
+      apt:
+        upgrade: dist
+        update_cache: yes
+
+    - name: Check if system restart is required
+      stat:
+        path: /var/run/reboot-required
+      register: reboot_required
+
+    - name: Send Slack notification if restart is required
+      community.general.slack:
+        token: "{{ slack_token }}"
+        channel: "#homelab-alerts"
+        msg: "⚠️ *{{ inventory_hostname }} requires a reboot after updates!*"
+        color: warning
+      when: reboot_required.stat.exists
+
+    # - name: print debug token
+    #   ansible.builtin.debug:
+    #     msg: "{{ test2 }}"
+
+    # - name: Send Discord notification if restart is required
+    #   community.general.discord:
+    #     webhook_url: "{{ discord_webhook }}"
+    #     content: "**⚠️ {{ inventory_hostname }} requires a reboot after updates!**"
+    #   when: reboot_required.stat.exists

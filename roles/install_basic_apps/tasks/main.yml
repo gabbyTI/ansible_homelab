@@ -10,4 +10,6 @@
       - curl
       - git
       - unzip
+      - net-tools
+      - qemu-guest-agent
     state: present

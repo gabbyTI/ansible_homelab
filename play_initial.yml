@@ -2,10 +2,10 @@
   hosts: homelab
   become: yes
   roles:
-    - role: common
+    - role: install_basic_apps
     - role: authorized_keys
       vars:
         add_authorized_keys:
-          - "{{ lookup('file', '~/.ssh/id_ed25519.pub') }}"
+          - "{{ lookup('file', './files/gabriel_key.pub') }}"
     - role: configure_sudo_nopasswd
   
