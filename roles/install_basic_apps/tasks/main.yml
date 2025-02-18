@@ -12,4 +12,17 @@
       - unzip
       - net-tools
       - qemu-guest-agent
+      - prometheus-node-exporter
     state: present
+
+- name: Ensure essential services are running and enabled
+  systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop:
+    - ssh
+    - qemu-guest-agent
+    - prometheus-node-exporter
+  when:
+    - ansible_virtualization_type != "lxc" or item != "qemu-guest-agent"
