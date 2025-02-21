@@ -8,4 +8,5 @@
         add_authorized_keys:
           - "{{ lookup('file', './files/gabriel_key.pub') }}"
     - role: configure_sudo_nopasswd
+    - role: set_static_ip
   

@@ -1,0 +1,12 @@
+network:
+  version: 2
+  ethernets:
+    {{ iface_name }}:
+      dhcp4: no
+      addresses:
+        - "{{ current_ip }}/24"
+      routes:
+        - to: default
+          via: "{{ gateway_ip }}"
+      nameservers:
+        addresses: {{ nameservers }}

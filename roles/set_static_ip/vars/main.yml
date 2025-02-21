@@ -1,0 +1,5 @@
+gateway_ip: "{{ ansible_default_ipv4.gateway }}"
+current_ip: "{{ ansible_default_ipv4.address }}"
+iface_name: "{{ ansible_default_ipv4.interface }}"
+nameservers:
+  - "192.168.2.1"  # DNS server(s), can be customized

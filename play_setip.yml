@@ -1,0 +1,6 @@
+- name: Configure static IP for Proxmox VMs using current IP and other details
+  hosts: tailscale
+  become: true
+  roles:
+    - role: set_static_ip
+      when: {{}}

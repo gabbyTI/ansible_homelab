@@ -1,0 +1,15 @@
+- name: Load gateway IP and nameservers
+  include_vars: ../vars/main.yml
+
+- name: Show the network configuration
+  ansible.builtin.debug:
+    msg: "Configuring interface {{ iface_name }} with IP {{ current_ip }}"
+
+- name: Apply Netplan configuration
+  ansible.builtin.template:
+    src: netplan.yml
+    dest: "/etc/netplan/50-cloud-init.yaml"
+  when:
+  - ansible_virtualization_type != "lxc"
+  notify:
+    - Apply netplan changes
